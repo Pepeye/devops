@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 app.get('/',(req, res) => {
-  res.send('pinging node server');
+  res.send('pinging server...');
 });
 
 app.listen(8080, ()=> {
