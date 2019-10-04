@@ -5,13 +5,13 @@ FROM node:alpine
 WORKDIR /app
 
 # install application dependencies
-COPY package*.json ./
+COPY package*.json .
 RUN npm install
 
 # copy build files
 # relative to build context
 # COPY source destination
-COPY ./ ./
+COPY . .
 
 # specifiy default command
 CMD ["npm", "start"]
