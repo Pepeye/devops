@@ -17,11 +17,32 @@ Kubectl will make Dashboard available at http://localhost:8001/api/v1/namespaces
 
 The UI can only be accessed from the machine where the command is executed. See ```kubectl proxy --help``` for more options.
 
-### Links
+Run the following command and copy / paste the token output generated to login to the dashboard
+```sh
+kubectl -n kube-system describe secret default | grep token:
+```
+
+## Alternatively
+
+### Create a Cluster Admin service account
+
+Run the folowing commands in a new terminal or your kubectl proxy command will stop. 
+```sh
+# This command will create a service account for a dashboard in the default namespace
+kubectl create serviceaccount dashboard -n default
+
+# Add the cluster binding rules to your dashboard account
+kubectl create clusterrolebinding dashboard-admin -n default  --clusterrole=cluster-admin  --serviceaccount=default:dashboard
+
+# Copy the secret token required for your dashboard login using the below command:
+kubectl get secret $(kubectl get serviceaccount dashboard -o jsonpath="{.secrets[0].name}") -o jsonpath="{.data.token}" | base64 --decode
+```
+
+##### Links
 - [Tutorial : Getting Started with Kubernetes with Docker on Mac](https://rominirani.com/tutorial-getting-started-with-kubernetes-with-docker-on-mac-7f58467203fd)
 
 
-# Creating sample user
+## Creating sample user
 
 In this guide, we will find out how to create a new user using Service Account mechanism of Kubernetes, grant this user admin permissions and login to Dashboard using bearer token tied to this user.
 
@@ -29,7 +50,7 @@ In this guide, we will find out how to create a new user using Service Account m
 
 Copy following snippets for `ServiceAccount` and `ClusterRoleBinding` to new manifest file like `dashboard-adminuser.yaml` and use `kubectl apply -f dashboard-adminuser.yaml` to create them.
 
-## Create Service Account
+### Create Service Account
 
 We are creating Service Account with name `admin-user` in namespace `kubernetes-dashboard` first.
 
@@ -41,7 +62,7 @@ metadata:
   namespace: kubernetes-dashboard
 ```
 
-## Create ClusterRoleBinding
+### Create ClusterRoleBinding
 
 In most cases after provisioning our cluster using `kops` or `kubeadm` or any other popular tool, the `ClusterRole` `admin-Role` already exists in the cluster. We can use it and create only `ClusterRoleBinding` for our `ServiceAccount`.
 
@@ -62,7 +83,7 @@ subjects:
   namespace: kubernetes-dashboard
 ```
 
-## Bearer Token
+### Bearer Token
 
 Now we need to find token we can use to log in. Execute following command:
 
