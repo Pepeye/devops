@@ -40,6 +40,8 @@ kubectl get secret $(kubectl get serviceaccount dashboard -o jsonpath="{.secrets
 
 ##### Links
 - [Tutorial : Getting Started with Kubernetes with Docker on Mac](https://rominirani.com/tutorial-getting-started-with-kubernetes-with-docker-on-mac-7f58467203fd)
+- [5 Minutes to Kubernetes Dashboard running on Docker Desktop for Windows 2.0.0.3](https://collabnix.com/kubernetes-dashboard-on-docker-desktop-for-windows-2-0-0-3-in-2-minutes/)
+-
 
 
 ## Creating sample user
@@ -111,11 +113,11 @@ token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2V
 
 Now copy the token and paste it into `Enter token` field on login screen.
 
-![Sing in](../../images/signin.png)
+![Sing in](https://github.com/kubernetes/dashboard/blob/master/docs/images/signin.png)
 
 Click `Sign in` button and that's it. You are now logged in as an admin.
 
-![Overview](../../images/overview.png)
+![Overview](https://github.com/kubernetes/dashboard/blob/master/docs/images/overview.png)
 
 In order to find out more about how to grant/deny permissions in Kubernetes read official [authentication](https://kubernetes.io/docs/reference/access-authn-authz/authentication/) & [authorization](https://kubernetes.io/docs/reference/access-authn-authz/authorization/) documentation.
 
