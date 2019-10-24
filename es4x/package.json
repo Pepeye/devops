@@ -1,0 +1,32 @@
+{
+  "name": "verty",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+
+  "main": "index.js",
+
+  "scripts": {
+    "start": "es4x",
+    "test": "es4x test index.test.js",
+    "postinstall": "es4x install",
+    "dockerfile": "es4x dockerfile"
+  },
+
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+
+  "devDependencies": {
+    "@vertx/unit": "^3.8.1",
+    "es4x-pm": "^0.9.0"
+  },
+
+  "dependencies": {
+    "@vertx/core": "^3.8.1"
+  },
+
+  "mvnDependencies": [
+    "io.vertx:vertx-lang-js:3.8.1"
+  ]
+}
